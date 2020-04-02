@@ -24,6 +24,8 @@
     "commander": "2.9.0",
     "fs-extra": "5.0.0",
     "glob": "7.1.1",
+    "mongodb": "^3.5.5",
+    "nanoid": "^3.0.2",
     "promisify-node": "0.4.0",
     "readline-sync": "1.4.7",
     "shelljs": "0.7.7"

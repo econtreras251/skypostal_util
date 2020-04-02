@@ -1,12 +1,16 @@
+const MongoConnection = require('./mongoSingleton');
 const {
-  mongodbEnv: { uri }
+  mongodbEnv: { host }
 } = require('../../config');
 const log = require('../helpers/log');
 const { INFO } = require('../constants/log-levels');
 
-const setupMongoDB = () => {
+const setupMongoDB = async () => {
   log('Setup mongoDB connection', INFO);
-  log(`Enable connection with ${uri}`, INFO);
+  await MongoConnection.getClient();
+  log(`Enable connection with ${host}`, INFO);
+  MongoConnection.closeConnection();
+  process.exit(0);
 };
 
 module.exports = setupMongoDB;

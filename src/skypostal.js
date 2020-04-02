@@ -5,29 +5,27 @@ const { version } = require('../package');
 
 // commands
 const setup = require('./commands/setup');
+const findUser = require('./commands/findUser');
+const atWarehouse = require('./commands/atWarehouse');
 
-skypostal
-  .version(version);
+skypostal.version(version);
 
 skypostal
   .command('setup')
-  .description('clone repository dependencies')
+  .description('Check dependencies for others commands')
   .action(setup);
 
-// skypostal
-//   .command('game <ticketId>')
-//   .description('create and deploy a new game reskin')
-//   .action(game);
-
-// skypostal
-//   .command('template')
-//   .description('release core files of template')
-//   .option('-i, --id, [id]', 'what template to release')
-//   .action(template);
+skypostal
+  .command('findUser <ci>')
+  .description('Find user by CI')
+  .action(findUser);
 
 skypostal
-  .command('*')
-  .action(() => skypostal.help());
+  .command('atWarehouse <externalTracking>')
+  .description('Update state of shipment by external tracking')
+  .action(atWarehouse);
+
+skypostal.command('*').action(() => skypostal.help());
 
 skypostal.parse(process.argv);
 

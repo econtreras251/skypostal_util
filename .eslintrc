@@ -2,11 +2,13 @@
   "extends": "airbnb",
   "rules": {
     "no-console": 0,
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": ["off"],
     "no-use-before-define": ["off"],
     "comma-dangle": ["error", "never"],
     "global-require": ["off"],
-    "import/no-dynamic-require": ["off"]
+    "import/no-dynamic-require": ["off"],
+    "no-underscore-dangle": ["off"],
+    "arrow-parens": ["off"]
   },
   "env": {
     "browser": false,
