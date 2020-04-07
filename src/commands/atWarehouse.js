@@ -1,11 +1,13 @@
-const { customAlphabet: generate } = require('nanoid/async');
+const generate = require('nanoid/async/generate');
 const { MongoError } = require('mongodb');
 const MongoConnection = require('../setup/mongoSingleton');
 const log = require('../helpers/log');
-const { SUCCESS, INFO, ERROR, WARNING } = require('../constants/log-levels');
+const {
+  SUCCESS, INFO, ERROR, WARNING
+} = require('../constants/log-levels');
 
 const generateTrackingNumber = async () =>
-  parseInt(await generate('0123456789', 12)(), 10);
+  parseInt(await generate('0123456789', 12), 10);
 
 const atWarehouse = async externalTracking => {
   try {
