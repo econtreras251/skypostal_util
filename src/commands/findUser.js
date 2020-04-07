@@ -1,7 +1,9 @@
 const { MongoError } = require('mongodb');
 const MongoConnection = require('../setup/mongoSingleton');
 const log = require('../helpers/log');
-const { SUCCESS, INFO, ERROR, WARNING } = require('../constants/log-levels');
+const {
+  SUCCESS, INFO, ERROR, WARNING
+} = require('../constants/log-levels');
 
 const findUser = async ci => {
   try {

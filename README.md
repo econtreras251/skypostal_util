@@ -10,8 +10,8 @@ Run
 npm run init
 ```
 
-# Usage
+## Usage
 
 ```shell
-skypostal at_warehouse -t=7784158
+skypostal atWarehouse 7784158
 ```
