@@ -2,27 +2,34 @@ const generate = require('nanoid/async/generate');
 const { MongoError } = require('mongodb');
 const MongoConnection = require('../setup/mongoSingleton');
 const log = require('../helpers/log');
-const {
-  SUCCESS, INFO, ERROR, WARNING
-} = require('../constants/log-levels');
+const { SUCCESS, INFO, ERROR, WARNING } = require('../constants/log-levels');
 
 const generateTrackingNumber = async () =>
   parseInt(await generate('0123456789', 12), 10);
 
-const atWarehouse = async externalTracking => {
+const atWarehouse = async (externalTracking, { weight, category }) => {
   try {
+    log(`Search for shipment ${externalTracking}`, INFO);
+
     const trackingNumber = await generateTrackingNumber();
     const puntoMioDb = await MongoConnection.getDb();
     const collection = await puntoMioDb.collection('shipments');
 
-    log(`Search for shipment ${externalTracking}`, INFO);
     log(`Generate tracking number ${trackingNumber}`, INFO);
+
     const shipment = await collection.findOne({ externalTracking });
+
+    if (!shipment) {
+      throw new Error(
+        `Shipment with tracking number ${externalTracking} not found`
+      );
+    }
+
     const event = {
       description: 'Paquete recibido en Miami',
       code: 'ALREC',
       visible: true,
-      date: new Date()
+      date: new Date(),
     };
 
     await collection.updateOne(
@@ -32,10 +39,10 @@ const atWarehouse = async externalTracking => {
         $set: {
           trackingNumber,
           status: 'AT_WAREHOUSE',
-          weight: 0.5,
-          category: 'ATR',
-          receivedInMiamiAt: new Date()
-        }
+          weight: weight || 0.5,
+          category: category || 'ATR',
+          receivedInMiamiAt: new Date(),
+        },
       }
     );
 
@@ -48,9 +55,12 @@ const atWarehouse = async externalTracking => {
       err.message.slice(0, 'Invalid Operation'.length) === 'Invalid Operation'
     ) {
       log(`Invalid Operation Error ${err.message}`, WARNING);
-    } else {
+    } else if (typeof err === 'string') {
       log(`Error in find: ${err}`, ERROR);
+    } else {
+      log(`Error in find: ${err.message}`, ERROR);
     }
+
     process.exit(1);
   }
 };

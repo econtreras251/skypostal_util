@@ -23,6 +23,8 @@ skypostal
 
 skypostal
   .command('atWarehouse <externalTracking>')
+  .option('-w, weight [weight]')
+  .option('-c, category [category]')
   .description('Update state of shipment by external tracking')
   .action(atWarehouse);
 

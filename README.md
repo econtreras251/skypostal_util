@@ -7,11 +7,11 @@ Node Build Tool to automate builds of Skypostal Events for PMIO
 Run
 
 ```shell
-npm run init
+npm install && npm run init
 ```
 
 ## Usage
 
 ```shell
-skypostal atWarehouse 7784158
+skypostal atWarehouse TRCK-337240 -w 0.020 -c "Tools & Home Improvement"
 ```
