@@ -13,7 +13,7 @@ const log = (message, type) => {
       colorMessage = `[${WARNING}] ${message}`.yellow;
       break;
     case INFO:
-      colorMessage = `[${INFO}] ${message}`.blue;
+      colorMessage = `[${INFO}] ${message}`.cyan;
       break;
     case SUCCESS:
       colorMessage = `[${SUCCESS}] ${message}`.green;

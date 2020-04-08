@@ -1,5 +1,6 @@
 {
   "mongodbEnv": {
-    "host": "URI_FOR_MONGODB"
+    "host": "URI_FOR_MONGODB",
+    "dbName": "DB_NAME"
   }
 }

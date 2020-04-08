@@ -1,13 +1,12 @@
 {
   "name": "skypostal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Provides automation for building Skypostal Events for PMIO",
   "main": "index.js",
   "scripts": {
     "init": "node ./init.js",
     "lint": "eslint src/**/*.js",
-    "lintFix": "eslint src/**/*.js --fix",
-    "test": "mocha --recursive"
+    "lintFix": "eslint src/**/*.js --fix"
   },
   "bin": {
     "skypostal": "./src/skypostal.js"
@@ -19,26 +18,19 @@
   "contributors": [],
   "license": "MIT",
   "dependencies": {
-    "axios": "0.17.1",
     "colors": "1.1.2",
     "commander": "2.9.0",
     "fs-extra": "5.0.0",
-    "glob": "7.1.1",
     "mongodb": "^3.5.5",
     "nanoid": "2.1.11",
-    "promisify-node": "0.4.0",
-    "readline-sync": "1.4.7",
     "shelljs": "0.7.7"
   },
   "devDependencies": {
-    "chai": "^4",
+    "@types/commander": "^2.12.2",
     "eslint": "^4",
     "eslint-config-airbnb": "^16",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.5.1",
-    "mocha": "^4",
-    "mock-require": "^2",
-    "sinon": "^4"
+    "eslint-plugin-react": "^7.5.1"
   }
 }

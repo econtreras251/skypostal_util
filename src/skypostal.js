@@ -7,6 +7,7 @@ const { version } = require('../package');
 const setup = require('./commands/setup');
 const findUser = require('./commands/findUser');
 const atWarehouse = require('./commands/atWarehouse');
+const notFound = require('./commands/notFound');
 
 skypostal.version(version);
 
@@ -25,7 +26,9 @@ skypostal
   .description('Update state of shipment by external tracking')
   .action(atWarehouse);
 
-skypostal.command('*').action(() => skypostal.help());
+skypostal
+  .command('*')
+  .action((unknownOperation) => notFound(unknownOperation, skypostal.commands));
 
 skypostal.parse(process.argv);
 
